@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: mss1
+  datasource:
+    url: jdbc:h2:mem:mss1
+    username: sa
+    password: 123456
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: false
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id:
+      ${spring.application.name}:${random.value}
+  client:
+    service-url:
+      defaultZone: http://${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+
+app:
+  myport: ${PORT:0}
+
+server:
+  port: ${app.myport}
+
+

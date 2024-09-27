@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  eurekaserver:
+    image: igor2435/eurekaserver:latest
+    ports:
+      - "8761:8761"
+    networks:
+      - my-network
+
+  mss1:
+    image: igor2435/mss1:latest
+    environment:
+      - PORT=8080
+      - SPRING_APPLICATION_NAME=mss1
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eurekaserver:8761/eureka/
+    ports:
+      - "8080:8080"
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
